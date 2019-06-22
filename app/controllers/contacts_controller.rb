@@ -27,7 +27,7 @@ class ContactsController < ApplicationController
      @contact = Contact.new(contact_params)
      if @contact.save
        ContactMailer.contact_mail(@contact).deliver  ##追記
-       redirect_to contact_path, notice: 'Contact was successfully created.'
+       redirect_to contact_path(@contact.id), notice: 'Contact was successfully created.'
      else
        render :new
      end
@@ -68,4 +68,3 @@ class ContactsController < ApplicationController
     def contact_params
       params.require(:contact).permit(:name, :email, :content)
     end
-end
